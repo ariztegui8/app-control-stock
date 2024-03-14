@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import mas from '@/assets/mas.svg';
+import { useSelector } from 'react-redux';
 
 const Entrada = () => {
 
@@ -32,6 +33,9 @@ const Entrada = () => {
           
       });
   }
+
+  const miNombre = useSelector(state => state.valores.nombre)
+  const miApellido = useSelector(state => state.valores.apellido)
 
   return (
     <div className='py-6 px-10'>
@@ -107,6 +111,11 @@ const Entrada = () => {
               {listEnt.length == 0 && 
                   <p className='text-center text-xl py-6'>Agrega una entrada</p>
               }
+
+              <div>
+                <p>{miNombre}</p>
+                <p>{miApellido}</p>
+              </div>
             </div>
         </div>
   )

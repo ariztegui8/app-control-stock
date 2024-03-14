@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mas from '@/assets/mas.svg';
 
 const Inventario = () => {
@@ -29,7 +29,7 @@ const Inventario = () => {
             };
             console.log(updatedList);
             return updatedList;
-            
+
         });
     }
 
@@ -55,7 +55,7 @@ const Inventario = () => {
                             <th>Stock Final</th>
                         </tr>
                     </thead>
-                   
+
                     <tbody>
                         {listInv.map((item, index) => (
                             <tr key={index}>
@@ -111,11 +111,11 @@ const Inventario = () => {
                             </tr>
                         ))}
                     </tbody>
-                    
+
                 </table>
-              {listInv.length == 0 && 
-                  <p className='text-center text-xl py-6'>Agrega un inventario</p>
-              }
+                {listInv.length == 0 &&
+                    <p className='text-center text-xl py-6'>Agrega un inventario</p>
+                }
             </div>
         </div>
     )

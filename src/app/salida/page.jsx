@@ -1,6 +1,8 @@
 'use client'
 import React, { useState } from 'react'
 import mas from '@/assets/mas.svg';
+import { useDispatch } from 'react-redux';
+import { guardarApellido, guardarnombre } from '@/store/slice';
 
 const Salida = () => {
 
@@ -31,6 +33,24 @@ const Salida = () => {
           return updatedList;
           
       });
+  }
+
+  const [nuevoValor, setNuevoValor] = useState('')
+  const [nuevoApellido, setNuevoApellido] = useState('')
+
+  const dispatch = useDispatch()
+
+  const actualizarValor = (e) =>{
+    setNuevoValor(e.target.value)
+  }
+
+  const actualizarApellido = (e) =>{
+    setNuevoApellido(e.target.value)
+  }
+
+  const modificar = ()=>{
+    dispatch(guardarnombre(nuevoValor))
+    dispatch(guardarApellido(nuevoApellido))
   }
 
   return (
@@ -107,6 +127,22 @@ const Salida = () => {
               {listSal.length == 0 && 
                   <p className='text-center text-xl py-6'>Agrega una salida</p>
               }
+            </div>
+
+            <div>
+                <input
+                    className='input'
+                    type="text" 
+                    value={nuevoValor}
+                    onChange={actualizarValor}
+                />
+                 <input
+                    className='input'
+                    type="text" 
+                    value={nuevoApellido}
+                    onChange={actualizarApellido}
+                />
+                <button onClick={modificar}>Modificar</button>
             </div>
         </div>
   )
