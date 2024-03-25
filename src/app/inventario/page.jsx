@@ -1,37 +1,29 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import mas from '@/assets/mas.svg';
+import useInv from '@/hooks/useInv';
 
 const Inventario = () => {
-    const [listInv, setListInv] = useState([]);
+    // const [listInv, setListInv] = useState([]);
 
-    const handleAddItem = () => {
-        setListInv(prevList => [
-            ...prevList,
-            {
-                key: prevList.length + 1,
-                code: '',
-                description: '',
-                initialStock: 0,
-                entrada: 0,
-                salida: 0,
-                finalStock: 0
-            }
-        ]);
-    }
+    const {listInv, handleAddItem, handleChangeFormItem} = useInv()
 
-    const handleChangeFormItem = (index, field, value) => {
-        setListInv(prevList => {
-            const updatedList = [...prevList];
-            updatedList[index] = {
-                ...updatedList[index],
-                [field]: value
-            };
-            console.log(updatedList);
-            return updatedList;
+    useEffect(() => {
+        localStorage.setItem('listInv', JSON.stringify(listInv));
+    }, [listInv]);
 
-        });
-    }
+    // const [formStorage, setFormStorage] = useState(null)
+
+    // useEffect(() => {
+    //   const storedForm = localStorage.getItem('form');
+    //   if (storedForm) {
+    //     setFormStorage(JSON.parse(storedForm))
+    //     console.log('Datos del localStorage:', formStorage);
+    //   } else {
+    //     console.log('No se encontraron datos en el localStorage');
+    //   }
+    // }, []);
+
 
     return (
         <div className='py-6 px-10'>

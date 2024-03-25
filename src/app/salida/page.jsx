@@ -1,60 +1,20 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import mas from '@/assets/mas.svg';
-import { useDispatch } from 'react-redux';
-import { guardarApellido, guardarnombre } from '@/store/slice';
+import useSal from '@/hooks/useSali';
 
 const Salida = () => {
 
-  const [listSal, setListSal] = useState([]);
+    //   const [listSal, setListSal] = useState([]);
 
-  const handleAddItem = () => {
-      setListSal(prevList => [
-          ...prevList,
-          {
-              key: prevList.length + 1,
-              factura: '',
-              fecha: '',
-              code: '',
-              description: '',
-              cantidad: 0,
-          }
-      ]);
-  }
+    const { listSal, handleAddItem, handleChangeFormItem,} = useSal()
 
-  const handleChangeFormItem = (index, field, value) => {
-      setListSal(prevList => {
-          const updatedList = [...prevList];
-          updatedList[index] = {
-              ...updatedList[index],
-              [field]: value
-          };
-          console.log(updatedList);
-          return updatedList;
-          
-      });
-  }
+    useEffect(() => {
+        localStorage.setItem('listSal', JSON.stringify(listSal));
+    }, [listSal]);
 
-  const [nuevoValor, setNuevoValor] = useState('')
-  const [nuevoApellido, setNuevoApellido] = useState('')
-
-  const dispatch = useDispatch()
-
-  const actualizarValor = (e) =>{
-    setNuevoValor(e.target.value)
-  }
-
-  const actualizarApellido = (e) =>{
-    setNuevoApellido(e.target.value)
-  }
-
-  const modificar = ()=>{
-    dispatch(guardarnombre(nuevoValor))
-    dispatch(guardarApellido(nuevoApellido))
-  }
-
-  return (
-    <div className='py-6 px-10'>
+    return (
+        <div className='py-6 px-10'>
             <div className='flex items-center justify-between gap-2 mb-4'>
                 <h1 className='text-bold text-2xl'>Salidas</h1>
                 <button className="btn" onClick={handleAddItem}>
@@ -74,7 +34,7 @@ const Salida = () => {
                             <th>Cantidad</th>
                         </tr>
                     </thead>
-                   
+
                     <tbody>
                         {listSal.map((item, index) => (
                             <tr key={index}>
@@ -97,7 +57,7 @@ const Salida = () => {
                                 </td>
                                 <td>
                                     <input
-                                        type="number"
+                                        type="text"
                                         className="input focus:outline-none bg-gray-50 w-full min-w-28"
                                         value={item.code}
                                         onChange={e => handleChangeFormItem(index, 'code', e.target.value)}
@@ -105,7 +65,7 @@ const Salida = () => {
                                 </td>
                                 <td>
                                     <input
-                                        type="number"
+                                        type="text"
                                         className="input focus:outline-none bg-gray-50 w-full min-w-28"
                                         value={item.description}
                                         onChange={e => handleChangeFormItem(index, 'description', e.target.value)}
@@ -122,30 +82,15 @@ const Salida = () => {
                             </tr>
                         ))}
                     </tbody>
-                    
+
                 </table>
-              {listSal.length == 0 && 
-                  <p className='text-center text-xl py-6'>Agrega una salida</p>
-              }
+                {listSal.length == 0 &&
+                    <p className='text-center text-xl py-6'>Agrega una salida</p>
+                }
             </div>
 
-            <div>
-                <input
-                    className='input'
-                    type="text" 
-                    value={nuevoValor}
-                    onChange={actualizarValor}
-                />
-                 <input
-                    className='input'
-                    type="text" 
-                    value={nuevoApellido}
-                    onChange={actualizarApellido}
-                />
-                <button onClick={modificar}>Modificar</button>
-            </div>
         </div>
-  )
+    )
 }
 
 export default Salida

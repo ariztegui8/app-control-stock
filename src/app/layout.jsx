@@ -1,6 +1,8 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
-import Providers from "@/store/provider";
+import { InvProvider } from "@/context/InvProvider";
+import { EntProvider } from "@/context/EntProvider";
+import { SalProvider } from "@/context/SalProvider";
 
 
 export const metadata = {
@@ -11,12 +13,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Providers>
-        <body>
-          <Navbar />
-          {children}
-        </body>
-      </Providers>
+      <InvProvider>
+        <EntProvider>
+          <SalProvider>
+            <body>
+              <Navbar />
+              {children}
+            </body>
+          </SalProvider>
+        </EntProvider>
+      </InvProvider>
     </html>
   );
 }
