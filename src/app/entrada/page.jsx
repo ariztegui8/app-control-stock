@@ -1,19 +1,18 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import mas from '@/assets/mas.svg';
-import { useSelector } from 'react-redux';
 import useEnt from '@/hooks/useEnt';
 
 const Entrada = () => {
 
-    const { listEnt, handleAddItem, handleChangeFormItem, extractData,} = useEnt()
+    const { listEnt, handleAddItem, handleChangeFormItem} = useEnt()
 
     useEffect(() => {
         localStorage.setItem('listEnt', JSON.stringify(listEnt));
     }, [listEnt]);
 
     return (
-        <div className='py-6 px-10'>
+        <div className='py-6 px-3 md:px-10'>
             <div className='flex items-center justify-between gap-2 mb-4'>
                 <h1 className='text-bold text-2xl'>Entradas</h1>
                 <button className="btn" onClick={handleAddItem}>
@@ -41,7 +40,7 @@ const Entrada = () => {
                                 <td>
                                     <input
                                         type="text"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-green-100 w-full min-w-28"
                                         value={item.factura}
                                         onChange={e => handleChangeFormItem(index, 'factura', e.target.value)}
                                     />
@@ -49,7 +48,7 @@ const Entrada = () => {
                                 <td>
                                     <input
                                         type="text"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-green-100 w-full min-w-28"
                                         value={item.fecha}
                                         onChange={e => handleChangeFormItem(index, 'fecha', e.target.value)}
                                     />
@@ -57,7 +56,7 @@ const Entrada = () => {
                                 <td>
                                     <input
                                         type="text"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-green-100 w-full min-w-28"
                                         value={item.code}
                                         onChange={e => handleChangeFormItem(index, 'code', e.target.value)}
                                     />
@@ -65,7 +64,7 @@ const Entrada = () => {
                                 <td>
                                     <input
                                         type="text"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-green-100 w-full min-w-28"
                                         value={item.description}
                                         onChange={e => handleChangeFormItem(index, 'description', e.target.value)}
                                     />
@@ -73,9 +72,9 @@ const Entrada = () => {
                                 <td>
                                     <input
                                         type="number"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
-                                        value={item.cantidad}
-                                        onChange={e => handleChangeFormItem(index, 'cantidad', e.target.value)}
+                                        className="input focus:outline-none bg-green-100 w-full min-w-28"
+                                        value={item.cantidadEnt}
+                                        onChange={e => handleChangeFormItem(index, 'cantidadEnt', e.target.value)}
                                     />
                                 </td>
                             </tr>

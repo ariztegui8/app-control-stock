@@ -19,7 +19,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className='bg-gray-100 px-10 py-2'>
+        <div className='bg-gray-100 py-2 px-3 md:px-10'>
             {/* MOBILE */}
             <div className='flex md:hidden items-center gap-2 justify-between'>
                 <div className="dropdown">

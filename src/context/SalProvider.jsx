@@ -1,4 +1,5 @@
 'use client'
+import useInv from "@/hooks/useInv";
 import { createContext, useState } from "react"
 
 const SalContext = createContext()
@@ -10,6 +11,8 @@ const SalProvider = ({children}) => {
         return storedSal ? JSON.parse(storedSal) : [];
     });
 
+    const { listInv} = useInv()
+
     const handleAddItem = () => {
         setListSal(prevList => [
             ...prevList,
@@ -19,23 +22,48 @@ const SalProvider = ({children}) => {
                 fecha: '',
                 code: '',
                 description: '',
-                cantidad: 0,
+                cantidadSal: 0,
             }
         ]);
     }
 
     const handleChangeFormItem = (index, field, value) => {
-        setListSal(prevList => {
-            const updatedList = [...prevList];
-            updatedList[index] = {
-                ...updatedList[index],
-                [field]: value
-            };
-            console.log(updatedList);
-            return updatedList;
+        if (field === 'code') {
+            const itemInInv = listInv.find(item => item.code === value);
+            if (itemInInv) {
+                setListSal(prevList => {
+                    const updatedList = [...prevList];
+                    updatedList[index] = {
+                        ...updatedList[index],
+                        [field]: value,
+                        description: itemInInv.descriptionInv
+                    };
+                    return updatedList;
+                });
+            } else {
+                setListSal(prevList => {
+                    const updatedList = [...prevList];
+                    updatedList[index] = {
+                        ...updatedList[index],
+                        [field]: value,
+                        description: ''
+                    };
+                    return updatedList;
+                });
+            }
+        } else {
+            setListSal(prevList => {
+                const updatedList = [...prevList];
+                updatedList[index] = {
+                    ...updatedList[index],
+                    [field]: value
+                };
+                return updatedList;
+            });
+        }
 
-        });
-    }
+      
+    };
 
     return(
         <SalContext.Provider

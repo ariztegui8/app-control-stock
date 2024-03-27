@@ -16,7 +16,7 @@ const InvProvider = ({children}) => {
             {
                 key: prevList.length + 1,
                 code: '',
-                description: '',
+                descriptionInv: '',
                 initialStock: 0,
                 entrada: 0,
                 salida: 0,
@@ -38,12 +38,21 @@ const InvProvider = ({children}) => {
         });
     }
 
+    const descripInv = () => {
+        return listInv.map(item => ({
+            description: item.descriptionInv
+        }));
+    };
+
+    const descriptionDataInv = descripInv();
+
     return(
         <InvContext.Provider
             value={{
                 listInv,
                 handleAddItem,
-                handleChangeFormItem
+                handleChangeFormItem,
+                descriptionDataInv,
             }}
         >
             {children}

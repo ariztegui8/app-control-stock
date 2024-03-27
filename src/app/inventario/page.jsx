@@ -4,29 +4,17 @@ import mas from '@/assets/mas.svg';
 import useInv from '@/hooks/useInv';
 
 const Inventario = () => {
-    // const [listInv, setListInv] = useState([]);
 
     const {listInv, handleAddItem, handleChangeFormItem} = useInv()
+
 
     useEffect(() => {
         localStorage.setItem('listInv', JSON.stringify(listInv));
     }, [listInv]);
 
-    // const [formStorage, setFormStorage] = useState(null)
-
-    // useEffect(() => {
-    //   const storedForm = localStorage.getItem('form');
-    //   if (storedForm) {
-    //     setFormStorage(JSON.parse(storedForm))
-    //     console.log('Datos del localStorage:', formStorage);
-    //   } else {
-    //     console.log('No se encontraron datos en el localStorage');
-    //   }
-    // }, []);
-
 
     return (
-        <div className='py-6 px-10'>
+        <div className='py-6 px-3 md:px-10'>
             <div className='flex items-center justify-between gap-2 mb-4'>
                 <h1 className='text-bold text-2xl'>Inventario</h1>
                 <button className="btn" onClick={handleAddItem}>
@@ -55,7 +43,7 @@ const Inventario = () => {
                                 <td>
                                     <input
                                         type="text"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-blue-100 w-full min-w-28"
                                         value={item.code}
                                         onChange={e => handleChangeFormItem(index, 'code', e.target.value)}
                                     />
@@ -63,15 +51,15 @@ const Inventario = () => {
                                 <td>
                                     <input
                                         type="text"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
-                                        value={item.description}
-                                        onChange={e => handleChangeFormItem(index, 'description', e.target.value)}
+                                        className="input focus:outline-none bg-blue-100 w-full min-w-28"
+                                        value={item.descriptionInv}
+                                        onChange={e => handleChangeFormItem(index, 'descriptionInv', e.target.value)}
                                     />
                                 </td>
                                 <td>
                                     <input
                                         type="number"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-blue-100 w-full min-w-28"
                                         value={item.initialStock}
                                         onChange={e => handleChangeFormItem(index, 'initialStock', e.target.value)}
                                     />
@@ -79,7 +67,7 @@ const Inventario = () => {
                                 <td>
                                     <input
                                         type="number"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-blue-100 w-full min-w-28"
                                         value={item.entrada}
                                         onChange={e => handleChangeFormItem(index, 'entrada', e.target.value)}
                                     />
@@ -87,7 +75,7 @@ const Inventario = () => {
                                 <td>
                                     <input
                                         type="number"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-blue-100 w-full min-w-28"
                                         value={item.salida}
                                         onChange={e => handleChangeFormItem(index, 'salida', e.target.value)}
                                     />
@@ -95,7 +83,7 @@ const Inventario = () => {
                                 <td>
                                     <input
                                         type="number"
-                                        className="input focus:outline-none bg-gray-50 w-full min-w-28"
+                                        className="input focus:outline-none bg-blue-100 w-full min-w-28"
                                         value={item.finalStock}
                                         onChange={e => handleChangeFormItem(index, 'finalStock', e.target.value)}
                                     />
